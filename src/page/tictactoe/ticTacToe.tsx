@@ -19,12 +19,11 @@ function Square({value, onSquareClick }) {
 }
 
 export default function TicTacToe() {
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null))
   function handleClick(i) {
     const nextSquares = squares.slice();
-    console.log(nextSquares, '이전값')
     nextSquares[i] = "X"
-    console.log(nextSquares,'이후값')
     setSquares(nextSquares)
   }
   return (
