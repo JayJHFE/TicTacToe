@@ -29,9 +29,9 @@ function calculateWinner(squares) {
     [2, 4, 6]
   ];
   for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
+    const [a, b, c] = lines[i]
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return console.log(squares[a])
     }
   }
   return null;
@@ -41,18 +41,28 @@ export default function TicTacToe() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null))
   function handleClick(i) {
-    if (squares[i]) {
+    if (squares[i] || calculateWinner(squares)) {
       return;
     }
     const nextSquares = squares.slice();
     if (xIsNext) {
-      nextSquares[i] = "X";
+      nextSquares[i] = "X"
     } else {
-      nextSquares[i] = "O";
+      nextSquares[i] = "O"
     }
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    setSquares(nextSquares)
+    setXIsNext(!xIsNext)
+    // calculateWinner(squares)
   }
+
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner !== null) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
+
   return (
     <div style={{marginTop:'200px', marginLeft: '200px'}}>
       <div className="board-row" style={{ display: 'flex' }}>
